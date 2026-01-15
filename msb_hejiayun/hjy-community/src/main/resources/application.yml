@@ -1,0 +1,84 @@
+# 项目信息配置
+hjy-community:
+  name: hjy-community
+  version: 1.0.0
+
+# 服务器配置
+server:
+  port: 8888
+  servlet:
+    context-path: /hejiayun
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 800
+    min-spare-threads: 30
+
+# 日志配置
+logging:
+  level:
+    com.msb: debug
+    org.springframework: warn
+
+# Spring核心配置（唯一的spring顶级节点，无重复）
+spring:
+  # 国际化配置
+  messages:
+    basename: i18n/messages
+  # 激活druid配置（配置已内嵌，保留兼容）
+  profiles:
+    active: druid
+  # 数据源配置（唯一的数据源配置，无重复）
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    # 兼容本地MySQL，修正字符编码和SSL配置
+    url: jdbc:mysql://127.0.0.1:3306/hejiayun_community?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root  # 替换为你的MySQL真实密码
+    # druid数据源专有配置
+    druid:
+      initialSize: 5
+      minIdle: 10
+      maxActive: 20
+      maxWait: 50000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      maxEvictableIdleTimeMillis: 900000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        allow:
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: 123456
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+
+# MyBatis分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# MyBatis-Plus配置（清理残留注释，无语法错误）
+mybatis-plus:
+  type-aliases-package: com.msb.hjycommunity.**.domain
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+  global-config:
+    db-config:
+      id-type: assign_id
+    banner: false
