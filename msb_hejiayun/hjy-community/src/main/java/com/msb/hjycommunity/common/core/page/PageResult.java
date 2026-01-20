@@ -26,6 +26,9 @@ public class PageResult implements Serializable {
     /*消息内容*/
     private String msg;
 
+
+
+
     public PageResult() {
     }
 
