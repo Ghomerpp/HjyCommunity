@@ -14,6 +14,8 @@ public class PageDomain {
     /*每页显示的记录数*/
     private Integer pageSize;
 
+
+
     public Integer getPageNum() {
         return pageNum;
     }
