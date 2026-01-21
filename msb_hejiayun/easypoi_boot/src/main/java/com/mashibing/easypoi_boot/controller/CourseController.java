@@ -1,0 +1,27 @@
+package com.mashibing.easypoi_boot.controller;
+
+import com.mashibing.easypoi_boot.entity.Course;
+import com.mashibing.easypoi_boot.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/course")
+public class CourseController {
+
+    @Autowired
+    private CourseService courseService;
+
+    @RequestMapping("/findAll")
+    public String findAll(Model model){
+        List<Course> courseList = courseService.findAll();
+        System.out.println(courseList);
+        model.addAttribute("courses",courseList);
+
+        return "index";
+    }
+}
