@@ -7,4 +7,8 @@
     <select id="findAll" resultType="Course">
         select cid,orderno,cname,brief,price from course;
     </select>
+
+    <insert id="save" parameterType="Course">
+        insert into course values (#{cid},#{orderno},#{cname},#{brief},#{price});
+    </insert>
 </mapper>

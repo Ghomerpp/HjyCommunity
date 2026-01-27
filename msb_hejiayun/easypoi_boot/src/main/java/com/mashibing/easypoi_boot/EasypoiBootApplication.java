@@ -7,6 +7,7 @@ import com.mashibing.easypoi_boot.pojo.User;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-
+@SpringBootApplication
 public class EasypoiBootApplication {
 
     public static void main(String[] args) {

@@ -11,4 +11,7 @@ public interface CourseMapper {
 
     //查询所有课程
     List<Course> findAll();
+
+    //插入记录
+    void save(Course course);
 }

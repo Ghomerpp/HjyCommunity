@@ -41,14 +41,13 @@ public class BaseController {
     }
 
     /*封装调用PageHelper的startPage方法*/
-    //核心作用：这是分页功能的 “开关”，用于初始化PageHelper（MyBatis 分页插件），让后续的 MyBatis 查询自动实现分页。
-    //PageHelper 帮你做了什么？
-    //PageHelper是 MyBatis 框架的第三方分页插件，核心作用是帮你 “自动完成分页逻辑”—— 不用手动写分页 SQL（比如LIMIT）、不用手动查总记录数，大幅简化 MyBatis 项目的分页查询代码。
-    //它相当于一个 “MyBatis 的 SQL 拦截器”，自动帮你完成上述所有麻烦事，你只需要做1 件事：调用PageHelper.startPage(pageNum, pageSize)。
     protected void startPage(){
+        // 1. 先从系统里拿一个“装分页参数的小盒子”
+        // 这个盒子里装着前端用户选的“页码”（比如第2页）、“每页显示多少条”（比如每页20条）
         PageDomain pageDomain = getPageDomain();
         Integer pageNum = pageDomain.getPageNum();
         Integer pageSize = pageDomain.getPageSize();
+        //只有页码和每页条数都有值（不是空的），才执行分页操作
         if (pageNum != null && pageSize != null){
             PageHelper.startPage(pageNum,pageSize);
         }
